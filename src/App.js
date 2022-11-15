@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import Element from './components/Element'
+import Header from './components/Header'
+import React, { useState } from 'react'
 
 function App() {
+  const [filterKeywords, setfilterKeywords] = useState([])
+
+  const addFilterKeywords = (data) => {
+    if (!filterKeywords.includes(data)) {
+      setfilterKeywords([...filterKeywords, data])
+    }
+  }
+
+  const removeFilterKeyword = (data) => {
+    const newData = filterKeywords.filter((element) => element !== data)
+    setfilterKeywords([...newData])
+  }
+
+  const removeAllFilterKeywords = () => {
+    setfilterKeywords([])
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <Header
+        filterKeywords={filterKeywords}
+        removeAllFilterKeywords={removeAllFilterKeywords}
+        removeFilterKeyword={removeFilterKeyword}
+      />
+      <Element
+        addFilterKeywords={addFilterKeywords}
+        filterKeywords={filterKeywords}
+      />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
