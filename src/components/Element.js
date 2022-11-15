@@ -1,26 +1,30 @@
 import data from '../data'
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 
-const Element = ({addFilterKeywords, filterKeywords}) => {
+const Element = ({ addFilterKeywords, filterKeywords }) => {
+  const [filteredJobs, setFilteredJobs] = useState([])
 
-    const [filteredJobs, setFilteredJobs] = useState([])
-  
-    const filterElements = () => {
-      if (filterKeywords) {
-        const newJobs = data.filter((d) => {
-          return filterKeywords.every((key) => {
-            return d.tools.includes(key) || d.languages.includes(key) || d.role === key || d.level === key
-          })
+  const filterElements = () => {
+    if (filterKeywords) {
+      const newJobs = data.filter((d) => {
+        return filterKeywords.every((key) => {
+          return (
+            d.tools.includes(key) ||
+            d.languages.includes(key) ||
+            d.role === key ||
+            d.level === key
+          )
         })
-        setFilteredJobs(newJobs)
-      } else {
-        setFilteredJobs(data)
-      }
+      })
+      setFilteredJobs(newJobs)
+    } else {
+      setFilteredJobs(data)
     }
-  
-    useEffect(() => {
-      filterElements()
-    }, [filterKeywords])
+  }
+
+  useEffect(() => {
+    filterElements()
+  }, [filterKeywords])
 
   return (
     <section className='elements-container'>
@@ -67,13 +71,31 @@ const Element = ({addFilterKeywords, filterKeywords}) => {
             </div>
             <div className='skills'>
               <ul>
-                <li onClick={(e)=> addFilterKeywords(e.target.innerText)}>{role}</li>
-                <li onClick={(e)=> addFilterKeywords(e.target.innerText)}>{level}</li>
-                {languages.map((language,idx) => {
-                  return <li key={idx} onClick={(e)=> addFilterKeywords(e.target.innerText)}>{language ? language : ''}</li>
+                <li onClick={(e) => addFilterKeywords(e.target.innerText)}>
+                  {role}
+                </li>
+                <li onClick={(e) => addFilterKeywords(e.target.innerText)}>
+                  {level}
+                </li>
+                {languages.map((language, idx) => {
+                  return (
+                    <li
+                      key={idx}
+                      onClick={(e) => addFilterKeywords(e.target.innerText)}
+                    >
+                      {language ? language : ''}
+                    </li>
+                  )
                 })}
-                {tools.map((tool,idx) => {
-                  return <li key={idx} onClick={(e)=> addFilterKeywords(e.target.innerText)}>{tool}</li>
+                {tools.map((tool, idx) => {
+                  return (
+                    <li
+                      key={idx}
+                      onClick={(e) => addFilterKeywords(e.target.innerText)}
+                    >
+                      {tool}
+                    </li>
+                  )
                 })}
               </ul>
             </div>
