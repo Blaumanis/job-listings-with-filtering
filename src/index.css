@@ -233,9 +233,19 @@ h4 {
   .element img {
     top: 38%;
   }
+  .module {
+    padding: 1rem;
+  }
+  .header {
+    margin-bottom: 2rem;
+  }
+
 }
 
 @media (max-width: 538px) {
+  .App {
+    padding: 0 1rem 2rem 1rem;
+  }
   .element {
     gap: 1rem;
     padding: 2rem 1rem;
